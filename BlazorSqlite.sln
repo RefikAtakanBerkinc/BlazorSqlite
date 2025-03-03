@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.35806.103 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorSqlite", "BlazorSqlite\BlazorSqlite.csproj", "{B20ED9E5-66C4-4463-BCFC-E64DF8FB5A30}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B20ED9E5-66C4-4463-BCFC-E64DF8FB5A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B20ED9E5-66C4-4463-BCFC-E64DF8FB5A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B20ED9E5-66C4-4463-BCFC-E64DF8FB5A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B20ED9E5-66C4-4463-BCFC-E64DF8FB5A30}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39DFD74E-354D-4BA0-A8D3-36EA5875CD64}
+	EndGlobalSection
+EndGlobal
