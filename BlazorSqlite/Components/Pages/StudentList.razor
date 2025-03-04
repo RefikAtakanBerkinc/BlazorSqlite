@@ -1,0 +1,94 @@
+﻿@page "/students"
+@inject IStudentService StudentService
+
+<h3>Öğrenci Listesi</h3>
+
+@if (students == null)
+{
+    <p>Öğrenciler yükleniyor...</p>
+}
+else if (!students.Any())
+{
+    <p>Öğrenci bulunamadı.</p>
+}
+else
+{
+    <ul>
+        @foreach (var student in students)
+        {
+            <li>
+                @student.FirstName @student.LastName
+                <button @onclick="() => EditStudent(student.Id)">✏️ Düzenle</button>
+                <button @onclick="() => DeleteStudent(student.Id)">🗑️ Sil</button>
+            </li>
+        }
+    </ul>
+}
+
+<h4>Yeni Öğrenci Ekle</h4>
+<input @bind="newStudent.FirstName" placeholder="Adı" />
+<input @bind="newStudent.LastName" placeholder="Soyadı" />
+<button @onclick="AddStudent">➕ Ekle</button>
+
+@if (editingStudent != null)
+{
+    <h4>Öğrenciyi Düzenle</h4>
+    <input @bind="editingStudent.FirstName" placeholder="Adı" />
+    <input @bind="editingStudent.LastName" placeholder="Soyadı" />
+    <button @onclick="UpdateStudent">💾 Kaydet</button>
+    <button @onclick="CancelEdit">❌ İptal</button>
+}
+
+<button @onclick="LoadStudents">🔄 Öğrencileri Yenile</button>
+
+@code {
+    private IEnumerable<Student> students;
+    private Student newStudent = new Student();
+    private Student editingStudent = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadStudents();
+    }
+
+    private async Task LoadStudents()
+    {
+        students = await StudentService.GetStudentsAsync();
+    }
+
+    private async Task AddStudent()
+    {
+        if (!string.IsNullOrWhiteSpace(newStudent.FirstName) && !string.IsNullOrWhiteSpace(newStudent.LastName))
+        {
+            await StudentService.AddStudentAsync(newStudent);
+            newStudent = new Student(); // Formu temizle
+            await LoadStudents(); // Listeyi güncelle
+        }
+    }
+
+    private async Task DeleteStudent(int id)
+    {
+        await StudentService.DeleteStudentAsync(id);
+        await LoadStudents(); // Listeyi güncelle
+    }
+
+    private async Task EditStudent(int id)
+    {
+        editingStudent = await StudentService.GetStudentByIdAsync(id);
+    }
+
+    private async Task UpdateStudent()
+    {
+        if (editingStudent != null)
+        {
+            await StudentService.EditStudentAsync(editingStudent);
+            editingStudent = null; // Düzenleme modundan çık
+            await LoadStudents();
+        }
+    }
+
+    private void CancelEdit()
+    {
+        editingStudent = null;
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using BlazorSqlite.Components;
 using BlazorSqlite.Data;
+using BlazorSqlite.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,12 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-var app = builder.Build();
+
 
 var connectionString = builder.Configuration.GetConnectionString("StudentDB");
 
 builder.Services.AddDbContextFactory<StudentDataContext>(options => options.UseSqlite(connectionString));
 
+builder.Services.AddScoped<IStudentService, StudentService>();
+var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

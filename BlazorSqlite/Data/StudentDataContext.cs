@@ -23,9 +23,6 @@ namespace BlazorSqlite.Data
         {
             modelBuilder.Entity<Student>().ToTable("Student");
 
-            modelBuilder.Entity<Student>().HasData(
-                new Student { Id = 1, FirstName = "Atakan", LastName = "BERKİNÇ" },
-                new Student { Id = 2, FirstName = "Refik", LastName = "BERKİNÇ" }                );
         }
     }
 }
